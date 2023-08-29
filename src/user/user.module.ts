@@ -7,17 +7,6 @@ import { User } from './entities/user.entity';
 @Module({
   controllers: [UserController],
   providers: [UserService],
-  imports:[
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'alisher1',
-      password: '12345',
-      database: 'NestCrud',
-      entities: [User],
-      synchronize: true,
-    }),
-  ]
+  imports: [TypeOrmModule.forFeature([User])],
 })
 export class UserModule {}

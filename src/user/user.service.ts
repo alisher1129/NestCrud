@@ -9,24 +9,31 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  create(user: User) {
-    return this.create(user);
+
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) { }
+
+  async create(user: CreateUserDto): Promise<User> {
+    const newuser = this.userRepository.create(user);
+    return this.userRepository.save(newuser);
   }
 
-  findAll() {
-    return this.findAll();
+  async findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return this.findOne(id);
+  async findOne(id: number): Promise<User> {
+    return this.userRepository.findOne({ where: { id } });
   }
 
-  update(id: number, user: User) {
-    this.update(id , user);
-    
+  async update(id: number, user: UpdateUserDto): Promise<User> {
+    await this.userRepository.update(id, user);
+    return this.userRepository.findOne({ where: { id } });
   }
 
-  remove(id: number) {
-    return this.remove(id);
+  async delete(id: number): Promise<void> {
+    await this.userRepository.delete(+id);
   }
 }
