@@ -9,7 +9,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @UsePipes(ValidationPipe)
   create(@Body() user: CreateUserDto) {
     return this.userService.create(user);
   }
