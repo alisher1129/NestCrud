@@ -1,11 +1,9 @@
-import { Entity , Column , PrimaryGeneratedColumn } from "typeorm";
-
-
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Profile } from './profile.entity';
 
 @Entity()
 export class User {
-
-    @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -16,4 +14,10 @@ export class User {
 
   @Column()
   email: string;
+
+  @OneToOne(()=> Profile)
+  @JoinColumn()
+  profile:Profile
+
+
 }
