@@ -15,7 +15,7 @@ export class User {
   @Column()
   email: string;
 
-  @OneToOne(()=> Profile)
+  @OneToOne(()=> Profile , { onDelete: "CASCADE"} )
   @JoinColumn()
   profile:Profile
 

@@ -45,7 +45,6 @@ export class UserService {
     return user;
   }
 
-
   //not working might be work tomorrow
   async updateUserWithProfile(
     userId: number,
@@ -102,10 +101,8 @@ export class UserService {
         ERROR_CODES.USER_NOT_FOUND,
       );
 
-    if (user.profile) {
-      await this.profileRepository.delete(user.profile.id);
-    }
+    await this.profileRepository.delete(user.profile.id);
 
-    await this.userRepository.delete(user.id);
+    await this.userRepository.delete(userId);
   }
 }
